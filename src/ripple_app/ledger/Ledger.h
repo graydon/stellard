@@ -105,8 +105,11 @@ public:
     Ledger (const RippleAddress & masterID, std::uint64_t startAmount); // used for the starting bootstrap ledger
 
     Ledger (uint256 const & parentHash, uint256 const & transHash, uint256 const & accountHash,
-            std::uint64_t totCoins, std::uint32_t inflateSeq, std::uint64_t feePool, std::uint32_t closeTime, std::uint32_t parentCloseTime, int closeFlags, int closeResolution,
+            std::uint64_t totCoins, std::uint32_t inflateSeq, std::uint64_t feePool, std::uint32_t closeTime, std::uint32_t parentCloseTime,
+            int closeFlags, int closeResolution,
             std::uint32_t ledgerSeq, bool & loaded); // used for database ledgers
+
+    Ledger (std::uint32_t ledgerSeq, std::uint32_t closeTime);
 
     Ledger (Blob const & rawLedger, bool hasPrefix);
 
@@ -207,6 +210,10 @@ public:
         mTotCoins -= fee;
 		mFeePool += fee;
     }
+    void setTotalCoins (std::uint64_t totCoins)
+    {
+        mTotCoins = totCoins;
+    }
     std::uint32_t getCloseTimeNC () const
     {
         return mCloseTime;
@@ -258,6 +265,9 @@ public:
         if (mAccountStateMap)
             mAccountStateMap->dropCache ();
     }
+
+    // returns false on error
+    bool addSLE (SLE const& sle);
 
     // ledger sync functions
     void setAcquiring (void);
