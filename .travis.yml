@@ -10,19 +10,15 @@ before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq g++-4.8
   - sudo apt-get install -qq libboost1.55-all-dev 
-
   # We want debug symbols for boost as we install gdb later
   - sudo apt-get install -qq libboost1.55-dbg
   - sudo apt-get install -qq protobuf-compiler libprotobuf-dev libssl-dev exuberant-ctags
-
   # We need gcc >= 4.8 for some c++11 features
   - sudo apt-get install -qq gcc-4.8
   - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8
   - sudo update-alternatives --set gcc /usr/bin/gcc-4.8
-
   # For faster linking
   - sudo apt-get -y install binutils-gold
-
   # Install libsodium (note: there is a PPA, could use that too but it seems a bit old)
   - wget http://download.libsodium.org/libsodium/releases/libsodium-0.7.0.tar.gz
   - tar -xzf libsodium-0.7.0.tar.gz
@@ -31,10 +27,8 @@ before_install:
   - make
   - sudo make install
   - popd
-
   # For backtrace reporting
   - sudo apt-get -y install gdb
-
   # Report versions
   - g++ -v
   - clang -v
@@ -42,11 +36,10 @@ before_install:
   - sudo updatedb
   - sudo locate libboost | grep /lib | grep -e ".a$"
 
-
 script:
   - set -e
   - scons 
-  - ldd ./build/rippled
+  - ldd ./build/stellard
   # Run unittests (under gdb)
   - | # create gdb script
     echo "set env MALLOC_CHECK_=3" > script.gdb 
