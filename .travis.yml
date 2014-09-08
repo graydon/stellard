@@ -41,13 +41,13 @@ script:
     echo "run" >> script.gdb
     echo "backtrace full" >> script.gdb 
     # gdb --help
-  - cat script.gdb | gdb --ex 'set print thread-events off' --return-child-result --args ./build/rippled --unittest 
+  - cat script.gdb | gdb --ex 'set print thread-events off' --return-child-result --args ./build/stellard --unittest
   # Run integration tests
   - npm install
   - npm test
 notifications:
   email:
     false
-  irc:
-    channels:
-      - "chat.freenode.net#ripple-dev"
+#  irc:
+#    channels:
+#      - "chat.freenode.net#stellar-dev"
