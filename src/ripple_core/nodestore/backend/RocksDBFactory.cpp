@@ -318,17 +318,10 @@ public:
 class RocksDBFactory : public Factory
 {
 public:
-    std::shared_ptr <rocksdb::Cache> m_lruCache;
     RocksDBEnv m_env;
 
     RocksDBFactory ()
     {
-        rocksdb::Options options;
-        options.create_if_missing = true;
-        options.block_cache = rocksdb::NewLRUCache (
-            getConfig ().getSize (siHashNodeDBCache) * 1024 * 1024);
-
-        m_lruCache = options.block_cache;
     }
 
     ~RocksDBFactory ()
