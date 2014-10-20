@@ -20,7 +20,7 @@
 namespace ripple {
 
 TransactionMaster::TransactionMaster ()
-    : mCache ("TransactionCache", 65536, 1800, get_seconds_clock (),
+    : mCache ("TransactionCache", 65536, 5, get_seconds_clock (),
         LogPartition::getJournal <TaggedCacheLog> ())
 {
 }

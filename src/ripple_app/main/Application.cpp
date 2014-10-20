@@ -257,10 +257,10 @@ public:
         , m_nodeStoreManager (NodeStore::make_Manager (
             std::move (make_Factories ())))
 
-        , m_tempNodeCache ("NodeCache", 16384, 90, get_seconds_clock (),
+        , m_tempNodeCache ("NodeCache", 128, 5, get_seconds_clock (),
             LogPartition::getJournal <TaggedCacheLog> ())
 
-        , m_sleCache ("LedgerEntryCache", 4096, 120, get_seconds_clock (),
+        , m_sleCache ("LedgerEntryCache", 128, 5, get_seconds_clock (),
             LogPartition::getJournal <TaggedCacheLog> ())
 
         , m_collectorManager (CollectorManager::New (

@@ -26,7 +26,7 @@ namespace ripple {
 #endif
 
 #ifndef CACHED_LEDGER_AGE
-#define CACHED_LEDGER_AGE 120
+#define CACHED_LEDGER_AGE 5
 #endif
 
 // FIXME: Need to clean up ledgers by index at some point
@@ -34,7 +34,7 @@ namespace ripple {
 LedgerHistory::LedgerHistory ()
     : m_ledgers_by_hash ("LedgerCache", CACHED_LEDGER_NUM, CACHED_LEDGER_AGE,
         get_seconds_clock (), LogPartition::getJournal <TaggedCacheLog> ())
-    , m_consensus_validated ("ConsensusValidated", 64, 300,
+    , m_consensus_validated ("ConsensusValidated", 64, 5,
         get_seconds_clock (), LogPartition::getJournal <TaggedCacheLog> ())
 {
 }
